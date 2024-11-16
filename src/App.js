@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/header";
-import {Main} from './pages'
+import {Main, Product} from './pages'
 import Footer from './components/footer'
 
 
@@ -10,7 +10,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/product" />
+        <Route path="/product" element={<Product />} />
         <Route path="/product/:productId" />
         <Route path="/basket" />
         <Route path="/panel" />
