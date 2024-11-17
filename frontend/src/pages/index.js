@@ -1,6 +1,6 @@
 export * from "./main/main";
 export * from "./product/product";
 export * from "./basket/basket";
+export * from "./panel/panel";
 export * from "./login/Login";
-export * from "./panel/Panel";
 export * from "./register/Register";
