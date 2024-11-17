@@ -1,5 +1,6 @@
 import React from "react";
 import image from "../../assets/img/hoodie1.jpg";
+import Footer from "../../components/footer";
 
 export function Product() {
   return (
@@ -45,6 +46,7 @@ export function Product() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

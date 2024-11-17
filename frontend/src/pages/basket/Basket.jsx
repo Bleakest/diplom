@@ -1,6 +1,7 @@
 import React from "react";
 import SearchPanel from "../../components/SearchPanel";
 import product from "../../assets/img/maika1.jpg";
+import Footer from "../../components/footer";
 
 export function Basket() {
   return (
@@ -53,6 +54,7 @@ export function Basket() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

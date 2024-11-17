@@ -7,6 +7,7 @@ import hat1 from "../../assets/img/hat1.jpg";
 import hoodie1 from "../../assets/img/hoodie1.jpg";
 import longsliv1 from "../../assets/img/longsliv1.jpg";
 import SearchPanel from "../../components/SearchPanel";
+import Footer from "../../components/footer";
 
 export function Main() {
   return (
@@ -80,6 +81,7 @@ export function Main() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
