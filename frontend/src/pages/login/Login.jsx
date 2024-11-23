@@ -1,12 +1,20 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import Footer from "../../components/footer";
+import { request } from "../../utils/request";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../actions";
+import { SelectUserRole } from "../../selectors";
+import { ROLE } from "../../constants";
+import { Navigate } from "react-router-dom";
 
 export const Login = () => {
-  const navigate = useNavigate();
+  const [serverError, setServerError] = useState(null);
+  const roleId = useSelector(SelectUserRole);
+  const dispatch = useDispatch();
+
   const FormSchema = yup.object().shape({
     login: yup
       .string()
@@ -22,21 +30,14 @@ export const Login = () => {
   });
 
   const onSubmit = async ({ login, password }) => {
-    // await fetch("/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json;charset=utf-8",
-    //   },
-    //   body: JSON.stringify({
-    //     login,
-    //     password,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) =>
-    //     sessionStorage.setItem("userData", JSON.stringify(data.user))
-    //   )
-    //   .then(() => navigate("/application"));
+    request("/login", "POST", { login, password }).then(({ error, user }) => {
+      if (error) {
+        setServerError(`Ошибка запроса: ${error}`);
+        return;
+      }
+      dispatch(setUser(user));
+      sessionStorage.setItem("userData", JSON.stringify(user));
+    });
   };
 
   const {
@@ -52,12 +53,18 @@ export const Login = () => {
   });
 
   const formError = errors?.login?.message || errors?.password?.message;
-  
+
+  const errorMessage = formError || serverError;
+
+  if (roleId !== ROLE.GUEST) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="flex justify-center items-center">
       <div className="mt-52 text-center w-[400px]">
         <div className="p-4 border border-black rounded-sm">
-          {formError && <div className="text-red-800">{formError}</div>}
+          {errorMessage && <div className="text-red-800">{errorMessage}</div>}
           <h1 className="text-xl pb-4 font-bold">Login</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="pb-4">
