@@ -3,17 +3,21 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const routes = require("./routes");
 
-const port = 3001;
+const port = 5500;
 const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
 
-app.use("/", routes);
+// app.use("/", routes);
+
+app.get('/users', (req, res) => {
+  res.send('helo from db')
+})
 
 mongoose
   .connect(
-    "mongodb+srv://test:123qwe@cluster.zobas.mongodb.net/blog?retryWrites=true&w=majority&appName=Cluster"
+    "mongodb+srv://user:qwe123@cluster.mdh5r.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster"
   )
   .then(() => {
     app.listen(port, () => {

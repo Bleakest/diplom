@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bgImage from "../../assets/img/photo.jpg";
-import Category from "./components/Category";
-import maika1 from "../../assets/img/maika1.jpg";
-import maika2 from "../../assets/img/maika2.jpg";
-import hat1 from "../../assets/img/hat1.jpg";
-import hoodie1 from "../../assets/img/hoodie1.jpg";
-import longsliv1 from "../../assets/img/longsliv1.jpg";
 import SearchPanel from "../../components/SearchPanel";
 import Footer from "../../components/footer";
+import { Product, Category } from "./components";
+import { useServerRequest } from "../../hooks";
 
 export function Main() {
+  const [products, setProducts] = useState([]);
+  const requestServer = useServerRequest()
+
+  // useEffect(() => {
+  //   requestServer("fetchProducts").then(({ res }) => {
+  //     setProducts(res);
+  //   });
+  // }, []);
+  // console.log(products);
+
   return (
     <div className="pt-[80px]">
       <div className="bg-zinc-700 w-full h-[350px] flex">
@@ -19,66 +25,9 @@ export function Main() {
         <SearchPanel />
         <Category />
         <div className="flex flex-wrap justify-around max-w-[1240px]">
-          <div>
-            <img width={250} src={maika1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={maika2} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={hat1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={hoodie1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={longsliv1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={longsliv1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={longsliv1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={longsliv1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={longsliv1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={longsliv1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={longsliv1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
-          <div>
-            <img width={250} src={longsliv1} />
-            <h2>Product Name</h2>
-            <div>Product cost</div>
-          </div>
+          {/* {products.map((product) => (
+            <Product product={product} />
+          ))} */}
         </div>
       </div>
       <Footer />

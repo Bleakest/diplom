@@ -16,14 +16,16 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-  try {
-      const { user, token } = await login(req.body.login, req.body.password)
+  res.send('1')
+  
+  // try {
+  //     const { user, token } = await login(req.body.login, req.body.password)
 
-      res.cookie('token', token, { httpOnly: true })
-          .send({ error: null, user: mapUser(user) });
-  } catch (e) {
-      res.send({ error: e.message || "Unknown error" })
-  }
+  //     res.cookie('token', token, { httpOnly: true })
+  //         .send({ error: null, user: mapUser(user) });
+  // } catch (e) {
+  //     res.send({ error: e.message || "Unknown error" })
+  // }
 })
 
 router.post('/logout', (req, res) => {

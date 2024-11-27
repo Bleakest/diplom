@@ -1,6 +1,6 @@
 import React from "react";
 
-function Category() {
+export function Category() {
   return (
     <div className="flex justify-center items-center mt-4">
       <ul className="flex w-[600px] justify-between">

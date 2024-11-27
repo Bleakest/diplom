@@ -14,3 +14,5 @@ router.get("/products", async (req, res) => {
     res.send({ error: e.message || "Unknown error" });
   }
 });
+
+module.exports = router

@@ -2,7 +2,7 @@ import { getUser } from "../api";
 import { sessions } from "../sessions";
 
 export const authorize = async (authLogin, authPassword) => {
-  const user = await getUser(authLogin);
+  const user = await getUser();
 
   if (!user) {
     return {
@@ -11,7 +11,8 @@ export const authorize = async (authLogin, authPassword) => {
     };
   }
 
-  const { id, login, password, roleId } = user;
+  const { id, login, password, role } = user;
+  
   if (authPassword !== password) {
     return {
       error: "Неверный пароль",
@@ -24,7 +25,7 @@ export const authorize = async (authLogin, authPassword) => {
     res: {
       id,
       login,
-      roleId,
+      role,
       session: sessions.create(user),
     },
   };

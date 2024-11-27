@@ -2,17 +2,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { request } from "../../utils/request";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../actions";
 import { SelectUserRole } from "../../selectors";
 import { ROLE } from "../../constants";
 import { Navigate } from "react-router-dom";
+import { server } from "../../bff";
 
 export const Login = () => {
+
   const [serverError, setServerError] = useState(null);
-  const roleId = useSelector(SelectUserRole);
+  const role = useSelector(SelectUserRole);
+
   const dispatch = useDispatch();
 
   const FormSchema = yup.object().shape({
@@ -30,11 +32,12 @@ export const Login = () => {
   });
 
   const onSubmit = async ({ login, password }) => {
-    request("/login", "POST", { login, password }).then(({ error, user }) => {
+    server.authorize(login, password).then(({ error, user }) => {
       if (error) {
         setServerError(`Ошибка запроса: ${error}`);
         return;
       }
+      console.log(user);
       dispatch(setUser(user));
       sessionStorage.setItem("userData", JSON.stringify(user));
     });
@@ -56,7 +59,7 @@ export const Login = () => {
 
   const errorMessage = formError || serverError;
 
-  if (roleId !== ROLE.GUEST) {
+  if (role !== ROLE.GUEST) {
     return <Navigate to="/" />;
   }
 
