@@ -4,8 +4,7 @@ module.exports = function (product) {
   return {
     id: product.id,
     title: product.title,
-    imageUrl: product.imageUrl,
+    imageUrl: product.image,
     cost: product.cost,
-    publishedAt: product.createdAt,
   };
 };

@@ -8,10 +8,9 @@ import { setUser } from "../../actions";
 import { SelectUserRole } from "../../selectors";
 import { ROLE } from "../../constants";
 import { Navigate } from "react-router-dom";
-import { server } from "../../bff";
+import { request } from "../../utils/request";
 
 export const Login = () => {
-
   const [serverError, setServerError] = useState(null);
   const role = useSelector(SelectUserRole);
 
@@ -31,13 +30,12 @@ export const Login = () => {
       .max(30, "Максимум 30 символов"),
   });
 
-  const onSubmit = async ({ login, password }) => {
-    server.authorize(login, password).then(({ error, user }) => {
+  const onSubmit = ({ login, password }) => {
+    request("/login", "POST", { login, password }).then(({ error, user }) => {
       if (error) {
         setServerError(`Ошибка запроса: ${error}`);
         return;
       }
-      console.log(user);
       dispatch(setUser(user));
       sessionStorage.setItem("userData", JSON.stringify(user));
     });

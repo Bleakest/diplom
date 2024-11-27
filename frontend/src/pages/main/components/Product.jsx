@@ -1,9 +1,10 @@
-export function Product({ imageUrl, name, cost }) {
+export function Product({ product }) {
+  
   return (
     <div>
-      <img width={250} src={imageUrl} />
-      <h2>{name}</h2>
-      <div>{cost}</div>
+      <img width={250} src={product.image} alt='clothes' />
+      <h2>{product.title}</h2>
+      <div>{product.cost}</div>
     </div>
   );
 }

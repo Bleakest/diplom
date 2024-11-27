@@ -1,36 +1,37 @@
-const express = require('express')
-const { register, login } = require('../controllers/user')
-const mapUser = require('../helpers/mapUser')
+const express = require("express");
+const { register, login } = require("../controllers/user");
+const mapUser = require("../helpers/mapUser");
 
-const router = express.Router({ mergeParams: true })
+const router = express.Router({ mergeParams: true });
 
-router.post('/register', async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
-      const { user, token } = await register(req.body.login, req.body.password);
+    const { user, token } = await register(req.body.login, req.body.password);
 
-      res.cookie('token', token, { httpOnly: true })
-          .send({ error: null, user: mapUser(user) });
+    res
+      .cookie("token", token, { httpOnly: true })
+      .send({ error: null, user: mapUser(user) });
   } catch (e) {
-      res.send({ error: e.message || "Unknown error" })
+    res.send({ error: e.message || "Unknown error" });
   }
-})
+});
 
-router.post('/login', async (req, res) => {
-  res.send('1')
-  
-  // try {
-  //     const { user, token } = await login(req.body.login, req.body.password)
+router.post("/login", async (req, res) => {
+  try {
+    const { user, token } = await login(req.body.login, req.body.password);
 
-  //     res.cookie('token', token, { httpOnly: true })
-  //         .send({ error: null, user: mapUser(user) });
-  // } catch (e) {
-  //     res.send({ error: e.message || "Unknown error" })
-  // }
-})
+    console.log(user);
 
-router.post('/logout', (req, res) => {
-  res.cookie('token', '', { httpOnly: true })
-      .send({})
-})
+    res
+      .cookie("token", token, { httpOnly: true })
+      .send({ error: null, user: mapUser(user) });
+  } catch (e) {
+    res.send({ error: e.message || "Unknown error" });
+  }
+});
 
-module.exports = router
+router.post("/logout", (req, res) => {
+  res.cookie("token", "", { httpOnly: true }).send({});
+});
+
+module.exports = router;
