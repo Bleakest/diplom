@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import bgImage from "../../assets/img/photo.jpg";
 import SearchPanel from "../../components/SearchPanel";
 import Footer from "../../components/footer";
@@ -22,7 +22,7 @@ export function Main() {
         <Category />
         <div className="flex flex-wrap justify-around max-w-[1240px]">
           {products.map((product) => (
-            <Product key={product._id} product={product} />
+            <Product key={product.id} product={product} />
           ))}
         </div>
       </div>

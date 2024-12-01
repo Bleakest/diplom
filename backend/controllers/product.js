@@ -4,4 +4,8 @@ function getProducts() {
   return Product.find();
 }
 
-module.exports = { getProducts };
+function getProduct(id) {
+  return Product.findById(id);
+}
+
+module.exports = { getProducts, getProduct };

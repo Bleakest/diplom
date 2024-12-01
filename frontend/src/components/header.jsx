@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
 // import { FaAddressBook } from "react-icons/fa";
-import { SelectUserRole } from "../selectors";
+import { SelectUserLogin, SelectUserRole } from "../selectors";
 import { ROLE } from "../constants";
 import { logout } from "../actions";
 
 function Header() {
   const dispatch = useDispatch();
   const roleId = useSelector(SelectUserRole);
+  const userLogin = useSelector(SelectUserLogin);
 
   const onLogout = () => {
     dispatch(logout());
@@ -35,7 +36,7 @@ function Header() {
         </div>
       ) : (
         <div>
-          <h1>f</h1>
+          <h1>{userLogin}</h1>
           <button onClick={onLogout}>logout</button>
         </div>
       )}

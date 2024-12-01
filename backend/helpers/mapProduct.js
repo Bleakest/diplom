@@ -1,10 +1,8 @@
-const mongoose = require("mongoose");
-
 module.exports = function (product) {
   return {
-    id: product.id,
+    id: product._id,
     title: product.title,
-    imageUrl: product.image,
+    image: product.image,
     cost: product.cost,
   };
 };

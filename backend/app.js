@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const routes = require("./routes");
 const Product = require("./models/Product");
-const { getProducts } = require("./controllers/product");
+const { getProduct } = require("./controllers/product");
+const mapProduct = require("./helpers/mapProduct");
 
 const port = 3001;
 const app = express();
@@ -21,23 +22,10 @@ mongoose
     });
   });
 
-// app.use("/", routes);
+app.use("/", routes);
 
-app.get("/products", async (req, res) => {
-  try {
-    const products = await getProducts()
-    
-    res.send({
-      error: null,
-      products,
-    });
-    console.log(products);
-    
-  } catch (e) {
-    res.send({ error: e.message || "Unknown error" });
-  }
-});
+app.get("/product/:id", async (req, res) => {
+  const product = await getProduct(req.params.id);
 
-app.get("/users", (req, res) => {
-  res.send({ res: "helo" });
+  res.send({ res: mapProduct(product) });
 });
