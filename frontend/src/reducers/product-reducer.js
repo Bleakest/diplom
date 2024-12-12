@@ -5,6 +5,7 @@ export const initialProductState = {
   title: "",
   image: "",
   cost: "",
+  category: "",
 };
 
 export const productReducer = (state = initialProductState, action) => {

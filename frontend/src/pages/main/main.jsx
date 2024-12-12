@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import bgImage from "../../assets/img/photo.jpg";
 import SearchPanel from "../../components/SearchPanel";
 import Footer from "../../components/footer";
 import { Product, Category } from "./components";
 import { request } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductsData } from "../../actions";
+import { selectProducts } from "../../selectors";
 
 export function Main() {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const products = useSelector(selectProducts);
 
-  useEffect(() => {
-    request("/products").then((data) => setProducts(data.products));
+  useLayoutEffect(() => {
+    request("/products").then((data) => dispatch(setProductsData(data.products)));
   }, []);
+  
 
   return (
     <div className="pt-[80px]">

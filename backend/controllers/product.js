@@ -4,8 +4,24 @@ function getProducts() {
   return Product.find();
 }
 
-function getProduct(id) {
-  return Product.findById(id);
+async function addProduct(product) {
+  return await Product.create(product);
 }
 
-module.exports = { getProducts, getProduct };
+function getProduct(id) {
+  return Product.findOne({ id: id });
+}
+function deleteProduct(id) {
+  return Product.deleteOne({ id: id });
+}
+function editProduct(productId, product) {
+  return Product.findOneAndUpdate({ id: productId }, product);
+}
+
+module.exports = {
+  getProducts,
+  getProduct,
+  addProduct,
+  deleteProduct,
+  editProduct,
+};
