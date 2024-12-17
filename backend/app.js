@@ -67,12 +67,14 @@ app.post("/basket", async (req, res) => {
   const newBasketProduct = await addBasketProduct({
     title: req.body.product.title,
     cost: req.body.product.cost,
-    size: req.body.value,
+    image: req.body.product.image,
+    size: req.body.value
   });
   res.send({ res: mapBasketProduct(newBasketProduct) });
 });
 app.get("/basket", async (req, res) => {
   const basket = await getBasket();
+  
   if (basket) {
     res.send({ res: basket.map((product) => mapBasketProduct(product)) });
   } else {

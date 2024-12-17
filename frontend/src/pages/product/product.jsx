@@ -42,6 +42,17 @@ export function Product() {
 
     if (value) {
       dispatch(addBasketProductAsync(product, value));
+      const doneEL = document.querySelector("#done");
+      doneEL.classList.remove("hidden");
+      setTimeout(() => {
+        doneEL.classList.add("hidden");
+      }, 2000);
+    } else {
+      const errorEL = document.querySelector("#error");
+      errorEL.classList.remove("hidden");
+      setTimeout(() => {
+        errorEL.classList.add("hidden");
+      }, 2000);
     }
   }
 
@@ -51,6 +62,12 @@ export function Product() {
         <div>{error}</div>
       ) : (
         <div className=" h-screen pt-[80px]">
+          <div id="error" className="hidden bg-red-200 text-center py-6">
+            Выберите размер
+          </div>
+          <div id="done" className="hidden bg-green-200 text-center py-6">
+            Добавлено
+          </div>
           <div className="container mx-auto flex justify-around pt-10">
             <img src={product.image} width={500} alt="hoodie" />
             <div className="w-[350px] items-center">
