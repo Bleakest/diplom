@@ -16,16 +16,24 @@ export const basketReducer = (state = initialBasketState, action) => {
     case ACTION_TYPE.ADD_BASKET_PRODUCT: {
       return {
         ...state,
-        products: [...initialBasketState.products, action.payload],
+        products: [...state.products, action.payload],
       };
     }
-    
-    // case ACTION_TYPE.REMOVE_BASKET_PRODUCT: {
+    // case ACTION_TYPE.LOAD_TOTAL_SUM: {
     //   return {
     //     ...state,
-    //     products: initialBasketState.products.push(action.payload),
+    //     totalSum: state.products.reduce((acc, item) => acc + item.cost)
     //   };
     // }
+
+    case ACTION_TYPE.REMOVE_BASKET_ITEM: {
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product.id !== action.payload
+        ),
+      };
+    }
     default:
       return state;
   }

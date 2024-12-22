@@ -4,7 +4,8 @@ import { Main, Product, Basket, Panel, Login, Register } from "./pages";
 import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "./actions";
-
+import {Error } from './components/error'
+ 
 function App() {
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/basket" element={<Basket />} />
         <Route path="/panel" element={<Panel />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

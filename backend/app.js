@@ -9,7 +9,11 @@ const {
   deleteProduct,
   editProduct,
 } = require("./controllers/product");
-const { addBasketProduct, getBasket } = require("./controllers/basket");
+const {
+  addBasketProduct,
+  getBasket,
+  removeBasketItem,
+} = require("./controllers/basket");
 const mapProduct = require("./helpers/mapProduct");
 const mapBasketProduct = require("./helpers/mapBasketProduct");
 
@@ -68,16 +72,24 @@ app.post("/basket", async (req, res) => {
     title: req.body.product.title,
     cost: req.body.product.cost,
     image: req.body.product.image,
-    size: req.body.value
+    size: req.body.value,
   });
   res.send({ res: mapBasketProduct(newBasketProduct) });
 });
 app.get("/basket", async (req, res) => {
   const basket = await getBasket();
-  
+
   if (basket) {
     res.send({ res: basket.map((product) => mapBasketProduct(product)) });
   } else {
     res.send({ error: null });
+  }
+});
+app.delete("/basket", async (req, res) => {
+  try {
+    await removeBasketItem(req.body.id);
+    res.send({ error: null });
+  } catch (error) {
+    res.send({ error: error });
   }
 });

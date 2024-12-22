@@ -1,29 +1,17 @@
 import React from "react";
 
-export function Category() {
+export function Category({
+  handleCategoryClick,
+  category,
+}) {
   return (
-    <div className="flex justify-center items-center mt-4">
-      <ul className="flex w-[600px] justify-between">
-        <li className="px-4 py-2 rounded-lg bg-zinc-400 hover:bg-zinc-300 hover:cursor-pointer">
-          Худи
-        </li>
-        <li className="px-4 py-2 rounded-lg bg-zinc-400 hover:bg-zinc-300 hover:cursor-pointer">
-          Футболки
-        </li>
-        <li className="px-4 py-2 rounded-lg bg-zinc-400 hover:bg-zinc-300 hover:cursor-pointer">
-          Лонгсливы
-        </li>
-        <li className="px-4 py-2 rounded-lg bg-zinc-400 hover:bg-zinc-300 hover:cursor-pointer">
-          Шорты
-        </li>
-        <li className="px-4 py-2 rounded-lg bg-zinc-400 hover:bg-zinc-300 hover:cursor-pointer">
-          Кепки
-        </li>
-        <li className="px-4 py-2 rounded-lg bg-zinc-400 hover:bg-zinc-300 hover:cursor-pointer">
-          Свитеры
-        </li>
-      </ul>
-    </div>
+    <button
+      id={category.name}
+      onClick={(e) => handleCategoryClick(e)}
+      className="px-4 mr-2 py-2 rounded-lg bg-zinc-400 hover:bg-zinc-300 hover:cursor-pointer"
+    >
+      {category.name}
+    </button>
   );
 }
 

@@ -7,7 +7,12 @@ function getBasket() {
   return Basket.find();
 }
 
+async function removeBasketItem(id) {
+  await Basket.deleteOne({ _id: id });
+}
+
 module.exports = {
   addBasketProduct,
-  getBasket
+  getBasket,
+  removeBasketItem,
 };

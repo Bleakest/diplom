@@ -1,14 +1,21 @@
+import { useDispatch } from "react-redux";
+import { removeBasketItemAsync } from "../../../actions";
+
 export function Product({ product }) {
-  console.log(product);
+  const dispatch = useDispatch();
+
+  function handleDelete(id) {
+    dispatch(removeBasketItemAsync(id));
+  }
 
   return (
     <div className="w-full pt-4">
-      <div className="w-full flex h-[150px] border-2">
-        <div className="mt-4 ml-4 w-full ">
+      <div className="w-full flex h-[150px] justify-center items-center border-2">
+        <div className="ml-4 w-full">
           <div className="flex justify-around mt-4">
             <div className="text-center">
               <h1>Товар:</h1>
-              <img width={70} src={product.image} />
+              <img alt="product-photo" width={70} src={product.image} />
             </div>
             <div className="text-center">
               <h1>Наименование</h1>
@@ -24,7 +31,12 @@ export function Product({ product }) {
             </div>
           </div>
         </div>
-        <div className="mr-4 mt-2">&#x2717;</div>
+        <button
+          onClick={() => handleDelete(product.id)}
+          className="mr-4 border px-2 py-2 bg-red-300 hover:bg-red-400"
+        >
+          Удалить
+        </button>
       </div>
     </div>
   );

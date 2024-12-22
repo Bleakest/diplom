@@ -22,6 +22,15 @@ function Header() {
       <Link to="/">
         <img width={60} src={logo} />
       </Link>
+      <div>
+        {roleId == ROLE.ADMIN ? (
+          <Link to="/panel">
+            <h1 className="hover:text-gray-400">Панель админа</h1>
+          </Link>
+        ) : (
+          <></>
+        )}
+      </div>
       {roleId === ROLE.GUEST ? (
         <div className="w-[350px] flex justify-around">
           <div className="flex items-center">
@@ -36,8 +45,11 @@ function Header() {
         </div>
       ) : (
         <div>
-          <h1>{userLogin}</h1>
-          <button onClick={onLogout}>logout</button>
+          <div className="flex mb-1 items-center justify-center">
+            <h1 className="mr-1">{userLogin}</h1>
+            <i className="fa fa-user" />
+          </div>
+          <button onClick={onLogout}>Выйти</button>
         </div>
       )}
     </div>

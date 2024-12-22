@@ -15,6 +15,12 @@ export function Product({ product }) {
     request("/products", "DELETE", { id }).then(() =>
       dispatch(deleteProduct(id))
     );
+
+    const deleteBtn = document.querySelector("#deleteBtn");
+    deleteBtn.classList.remove("hidden");
+    setTimeout(() => {
+      deleteBtn.classList.add("hidden");
+    }, 2000);
   }
 
   function handleEdit(id, title, category, cost, image) {
@@ -26,6 +32,12 @@ export function Product({ product }) {
       cost,
       image,
     });
+
+    const editBtn = document.querySelector("#editBtn");
+    editBtn.classList.remove("hidden");
+    setTimeout(() => {
+      editBtn.classList.add("hidden");
+    }, 2000);
   }
 
   const onTitleChange = ({ target }) => setTitle(target.value);

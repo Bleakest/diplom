@@ -20,8 +20,6 @@ router.post("/login", async (req, res) => {
   try {
     const { user, token } = await login(req.body.login, req.body.password);
 
-    console.log(user);
-
     res
       .cookie("token", token, { httpOnly: true })
       .send({ error: null, user: mapUser(user) });
