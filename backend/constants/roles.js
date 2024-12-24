@@ -1,6 +1,6 @@
 const ADMIN = 0;
-const USER = 0;
-const GUEST = 1;
+const USER = 1;
+const GUEST = 2;
 
 module.exports = {
   ADMIN,

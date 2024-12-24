@@ -47,8 +47,6 @@ export const Register = () => {
           return;
         }
 
-        console.log("пользователь зареган в бд");
-
         dispatch(setUser(user));
         sessionStorage.setItem("userData", JSON.stringify(user));
       }

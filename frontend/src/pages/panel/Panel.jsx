@@ -18,7 +18,6 @@ export function Panel() {
   const [isLoading, setIsLoading] = useState(true);
   const roleId = useSelector(SelectUserRole);
   const navigate = useNavigate();
-  console.log(roleId);
 
   useLayoutEffect(() => {
     request("/products").then((data) =>

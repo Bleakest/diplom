@@ -1,11 +1,18 @@
 const express = require("express");
-const Product = require("../models/Product");
-const { getProducts, getProduct } = require("../controllers/product");
+const {
+  getProducts,
+  getProduct,
+  deleteProduct,
+  editProduct,
+} = require("../controllers/product");
 const mapProduct = require("../helpers/mapProduct");
+const isAdmin = require("../middlewares/isAdmin");
+const authenticated = require("../middlewares/authenticated");
+const ROLES = require("../constants/roles");
 
 const router = express.Router({ mergeParams: true });
 
-router.get("/", async (req, res) => {
+router.get("/products", async (req, res) => {
   try {
     const products = await getProducts();
 
@@ -18,8 +25,39 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/product/:id", async (req, res) => {
+  try {
+    const product = await getProduct(req.params.id);
+    res.send({ res: mapProduct(product) });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
+router.delete(
+  "/products",
+  authenticated,
+  isAdmin([ROLES.ADMIN]),
+  async (req, res) => {
+    await deleteProduct(req.body.id);
+    res.send({ error: null });
+  }
+);
 
-
+router.patch(
+  "/products",
+  authenticated,
+  isAdmin([ROLES.ADMIN]),
+  async (req, res) => {
+    await editProduct(req.body.productId, {
+      id: req.body.id,
+      title: req.body.title,
+      category: req.body.category,
+      cost: req.body.cost,
+      image: req.body.image,
+    });
+    res.send({ error: null });
+  }
+);
 
 module.exports = router;

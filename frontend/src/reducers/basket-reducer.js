@@ -19,12 +19,6 @@ export const basketReducer = (state = initialBasketState, action) => {
         products: [...state.products, action.payload],
       };
     }
-    // case ACTION_TYPE.LOAD_TOTAL_SUM: {
-    //   return {
-    //     ...state,
-    //     totalSum: state.products.reduce((acc, item) => acc + item.cost)
-    //   };
-    // }
 
     case ACTION_TYPE.REMOVE_BASKET_ITEM: {
       return {
