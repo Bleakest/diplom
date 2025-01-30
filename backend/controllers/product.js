@@ -14,8 +14,8 @@ function getProduct(id) {
 function deleteProduct(id) {
   return Product.deleteOne({ id: id });
 }
-function editProduct(productId, product) {
-  return Product.findOneAndUpdate({ id: productId }, product);
+function editProduct(id, product) {
+  return Product.findOneAndUpdate({ id: id }, product);
 }
 
 module.exports = {

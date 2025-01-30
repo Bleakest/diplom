@@ -29,8 +29,8 @@ router.get("/product/:id", async (req, res) => {
   try {
     const product = await getProduct(req.params.id);
     res.send({ res: mapProduct(product) });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    res.send({ error: e.message || "Unknown error" });
   }
 });
 
@@ -49,7 +49,7 @@ router.patch(
   authenticated,
   isAdmin([ROLES.ADMIN]),
   async (req, res) => {
-    await editProduct(req.body.productId, {
+    await editProduct(req.body.EditingProductId, {
       id: req.body.id,
       title: req.body.title,
       category: req.body.category,

@@ -1,4 +1,4 @@
-import { request } from "../utils";
+import { request } from "../../utils";
 import { addBasketProduct } from "./add-basket-product";
 
 export const addBasketProductAsync = (product, value) => (dispatch) => {

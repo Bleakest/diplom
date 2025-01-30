@@ -1,4 +1,4 @@
-import { request } from "../utils";
+import { request } from "../../utils";
 import { setProductData } from "./set-product-data";
 
 export const loadProductAsync = (productId) => (dispatch) =>

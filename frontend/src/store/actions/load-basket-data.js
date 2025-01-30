@@ -1,4 +1,4 @@
-import { request } from "../utils";
+import { request } from "../../utils";
 import { setBasketData } from "./set-basket-data";
 
 export const loadBasketData = () => (dispatch) =>

@@ -1,11 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import logo from "../assets/img/logo.png";
-// import { FaAddressBook } from "react-icons/fa";
-import { SelectUserLogin, SelectUserRole } from "../selectors";
+import { SelectUserLogin, SelectUserRole } from "../store/selectors";
 import { ROLE } from "../constants";
-import { logout } from "../actions";
+import { logout } from "../store/actions";
 
 function Header() {
   const dispatch = useDispatch();
@@ -49,7 +48,9 @@ function Header() {
             <h1 className="mr-1">{userLogin}</h1>
             <i className="fa fa-user" />
           </div>
-          <button onClick={onLogout}>Выйти</button>
+          <button className="hover:text-gray-400" onClick={onLogout}>
+            Выйти
+          </button>
         </div>
       )}
     </div>

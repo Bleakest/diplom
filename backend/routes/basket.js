@@ -13,6 +13,7 @@ router.post("/basket", async (req, res) => {
     title: req.body.product.title,
     cost: req.body.product.cost,
     image: req.body.product.image,
+    productId: req.body.product.id,
     size: req.body.value,
   });
   res.send({ res: mapBasketProduct(newBasketProduct) });

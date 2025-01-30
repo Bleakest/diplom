@@ -5,9 +5,9 @@ import { Navigate } from "react-router-dom";
 import * as yup from "yup";
 import { request } from "../../utils/request";
 import { useDispatch, useSelector } from "react-redux";
-import { SelectUserRole } from "../../selectors";
+import { SelectUserRole } from "../../store/selectors";
 import { ROLE } from "../../constants";
-import { setUser } from "../../actions";
+import { setUser } from "../../store/actions";
 
 const regFormSchema = yup.object().shape({
   login: yup
@@ -29,7 +29,6 @@ export const Register = () => {
   const {
     register,
     handleSubmit,
-    // reset,
     formState: { errors },
   } = useForm({
     defaultValues: {

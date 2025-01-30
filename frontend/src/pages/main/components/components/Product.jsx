@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 export function Product({ product }) {
+  
   return (
     <Link to={`/product/${product.id}`}>
       <div className="text-center">
